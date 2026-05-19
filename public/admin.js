@@ -1,7 +1,7 @@
 const api = {
   async get(path) {
     const res = await fetch(path);
-    return res.json();
+    return parseApiResponse(res);
   },
   async send(path, method, body) {
     const res = await fetch(path, {
@@ -9,9 +9,26 @@ const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
-    return res.json();
+    return parseApiResponse(res);
   },
 };
+
+async function parseApiResponse(res) {
+  const text = await res.text();
+  try {
+    const data = JSON.parse(text);
+    if (!res.ok || data.ok === false) {
+      throw new Error(data.error || `API request failed with ${res.status}`);
+    }
+    return data;
+  } catch (error) {
+    if (error instanceof SyntaxError) {
+      const preview = text.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 240);
+      throw new Error(preview || `API returned non-JSON response from ${res.url}`);
+    }
+    throw error;
+  }
+}
 
 function escapeHtml(value) {
   return String(value ?? '').replace(/[&<>"']/g, (char) => ({
@@ -65,4 +82,7 @@ document.querySelector('#contact-form').addEventListener('submit', async (event)
   await Promise.all([loadStats(), loadContacts()]);
 });
 
-Promise.all([loadStats(), loadContacts()]);
+Promise.all([loadStats(), loadContacts()]).catch((error) => {
+  document.querySelector('#contacts-body').innerHTML = `<tr><td colspan="5" class="empty">${escapeHtml(error.message)}</td></tr>`;
+  console.error(error);
+});

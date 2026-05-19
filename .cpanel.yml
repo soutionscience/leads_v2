@@ -10,3 +10,4 @@ deployment:
     - /bin/cp -R public $DEPLOYPATH
     - /bin/cp index.php $DEPLOYPATH
     - /bin/cp .htaccess $DEPLOYPATH
+    - if [ ! -f $DEPLOYPATH/.env ]; then /bin/cp .env.production.example $DEPLOYPATH/.env.example; fi

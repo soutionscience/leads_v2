@@ -115,6 +115,12 @@ Admin:
 https://leads.solutionscience.co.ke/public/admin.html
 ```
 
+Health check:
+
+```text
+https://leads.solutionscience.co.ke/api/health.php
+```
+
 MacroDroid incoming call URL:
 
 ```text

@@ -1,5 +1,14 @@
 <?php
 
+ini_set('display_errors', '0');
+
+set_exception_handler(function (Throwable $error): void {
+    json_response([
+        'ok' => false,
+        'error' => $error->getMessage(),
+    ], 500);
+});
+
 require_once __DIR__ . '/db.php';
 
 function json_response(array $data, int $status = 200): void

@@ -7,7 +7,7 @@ const state = {
 const api = {
   async get(path) {
     const res = await fetch(path);
-    return res.json();
+    return parseApiResponse(res);
   },
   async send(path, method, body) {
     const res = await fetch(path, {
@@ -15,12 +15,33 @@ const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
-    return res.json();
+    return parseApiResponse(res);
   },
 };
 
 const body = document.querySelector('#leads-body');
 const subtitle = document.querySelector('#subtitle');
+
+async function parseApiResponse(res) {
+  const text = await res.text();
+  try {
+    const data = JSON.parse(text);
+    if (!res.ok || data.ok === false) {
+      throw new Error(data.error || `API request failed with ${res.status}`);
+    }
+    return data;
+  } catch (error) {
+    if (error instanceof SyntaxError) {
+      const preview = text.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 240);
+      throw new Error(preview || `API returned non-JSON response from ${res.url}`);
+    }
+    throw error;
+  }
+}
+
+function showError(error) {
+  body.innerHTML = `<tr><td colspan="8" class="empty">${escapeHtml(error.message)}</td></tr>`;
+}
 
 function money(value) {
   if (value === null || value === undefined || value === '') return '';
@@ -147,15 +168,20 @@ function escapeHtml(value) {
 }
 
 async function loadLeads() {
-  let url = `../api/leads.php?range=${state.range}`;
-  if (state.range === 'custom') {
-    url += `&start=${document.querySelector('#start-date').value}&end=${document.querySelector('#end-date').value}`;
+  try {
+    let url = `../api/leads.php?range=${state.range}`;
+    if (state.range === 'custom') {
+      url += `&start=${document.querySelector('#start-date').value}&end=${document.querySelector('#end-date').value}`;
+    }
+    const data = await api.get(url);
+    state.leads = data.leads || [];
+    subtitle.textContent = state.range === 'followups' ? 'Follow-ups due' : `${state.range.replace('days', ' days ago')} leads`;
+    renderLeads();
+    await refreshStats();
+  } catch (error) {
+    showError(error);
+    console.error(error);
   }
-  const data = await api.get(url);
-  state.leads = data.leads || [];
-  subtitle.textContent = state.range === 'followups' ? 'Follow-ups due' : `${state.range.replace('days', ' days ago')} leads`;
-  renderLeads();
-  await refreshStats();
 }
 
 body.addEventListener('change', async (event) => {
