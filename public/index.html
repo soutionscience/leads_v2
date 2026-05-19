@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leads CRM</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Leads CRM</h1>
+      <p id="subtitle">Today's call leads</p>
+    </div>
+    <nav>
+      <a href="index.html" aria-current="page">Leads</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="metrics" aria-label="Today's status">
+      <div><span id="metric-total">0</span><small>Today</small></div>
+      <div><span id="metric-bought">0</span><small>Bought</small></div>
+      <div><span id="metric-quoting">0</span><small>Quoting</small></div>
+      <div><span id="metric-ignored">0</span><small>Ignored calls</small></div>
+    </section>
+
+    <section class="toolbar" aria-label="Lead filters">
+      <button class="tab active" data-range="today">Today</button>
+      <button class="tab" data-range="yesterday">Yesterday</button>
+      <button class="tab" data-range="2days">2 days</button>
+      <button class="tab" data-range="3days">3 days</button>
+      <button class="tab" data-range="followups">Follow-ups</button>
+      <label>
+        <span>From</span>
+        <input id="start-date" type="date">
+      </label>
+      <label>
+        <span>To</span>
+        <input id="end-date" type="date">
+      </label>
+      <button id="custom-range">Custom</button>
+      <button id="manual-lead" class="primary">Add lead</button>
+    </section>
+
+    <section class="table-wrap" aria-label="Leads table">
+      <table>
+        <thead>
+          <tr>
+            <th>Phone</th>
+            <th>Name</th>
+            <th>Timer</th>
+            <th>Product</th>
+            <th>Delivery</th>
+            <th>Resolution</th>
+            <th>Follow-ups</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="leads-body">
+          <tr><td colspan="8" class="empty">0 leads today</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <dialog id="manual-dialog">
+    <form method="dialog" class="dialog-form">
+      <h2>Add lead</h2>
+      <label>Phone <input id="manual-phone" autocomplete="tel"></label>
+      <label>Name <input id="manual-name" autocomplete="name"></label>
+      <menu>
+        <button value="cancel">Cancel</button>
+        <button id="save-manual" value="default" class="primary">Save</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

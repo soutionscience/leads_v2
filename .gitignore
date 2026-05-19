@@ -1,0 +1,9 @@
+.env
+*.sqlite
+*.sqlite-journal
+*.sqlite-shm
+*.sqlite-wal
+database/*.sqlite*
+php-local.ini
+.DS_Store
+Thumbs.db

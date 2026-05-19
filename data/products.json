@@ -1,0 +1,7 @@
+[
+  { "sku": "SST-001", "name": "Solar Street Light 100W", "selling_price": 6500, "category": "Lighting" },
+  { "sku": "SST-002", "name": "Solar Flood Light 200W", "selling_price": 9200, "category": "Lighting" },
+  { "sku": "SST-003", "name": "CCTV Camera Kit 4 Channel", "selling_price": 18500, "category": "Security" },
+  { "sku": "SST-004", "name": "Electric Fence Energizer", "selling_price": 14500, "category": "Security" },
+  { "sku": "SST-005", "name": "Backup Battery 12V 100Ah", "selling_price": 21000, "category": "Power" }
+]

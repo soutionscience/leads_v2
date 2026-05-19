@@ -1,0 +1,8 @@
+[
+  { "area": "Nairobi CBD", "fee": 300, "zone": "Nairobi" },
+  { "area": "Westlands", "fee": 500, "zone": "Nairobi" },
+  { "area": "Rongai", "fee": 900, "zone": "Nairobi Metro" },
+  { "area": "Thika", "fee": 1200, "zone": "Central" },
+  { "area": "Mombasa", "fee": 800, "zone": "Coast" },
+  { "area": "Kisumu", "fee": 900, "zone": "Western" }
+]

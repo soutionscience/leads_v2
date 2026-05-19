@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leads CRM Admin</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Admin</h1>
+      <p>Lead performance and ignored contacts</p>
+    </div>
+    <nav>
+      <a href="index.html">Leads</a>
+      <a href="admin.html" aria-current="page">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="metrics wide" aria-label="Admin stats">
+      <div><span id="avg-daily">0</span><small>Avg daily leads</small></div>
+      <div><span id="conversion">0%</span><small>Conversion</small></div>
+      <div><span id="followup-rate">0%</span><small>Follow-up rate</small></div>
+      <div><span id="admin-ignored">0</span><small>Ignored today</small></div>
+    </section>
+
+    <section class="admin-grid">
+      <div class="panel">
+        <h2>Add supplier / delivery / staff</h2>
+        <form id="contact-form" class="stack">
+          <label>Phone <input name="phone" required></label>
+          <label>Name <input name="name"></label>
+          <label>Type
+            <select name="type">
+              <option value="supplier">Supplier</option>
+              <option value="delivery">Delivery rider</option>
+              <option value="staff">Staff</option>
+              <option value="spam">Spam / ignore</option>
+              <option value="customer">Customer</option>
+            </select>
+          </label>
+          <label>Notes <textarea name="notes" rows="3"></textarea></label>
+          <button class="primary">Save contact</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h2>Top products</h2>
+        <ol id="top-products" class="list"></ol>
+      </div>
+    </section>
+
+    <section class="table-wrap">
+      <h2>Contacts</h2>
+      <table>
+        <thead><tr><th>Phone</th><th>Name</th><th>Type</th><th>Ignored</th><th>Notes</th></tr></thead>
+        <tbody id="contacts-body"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>
