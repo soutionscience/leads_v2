@@ -105,6 +105,13 @@ https://yourdomain.com/leads-crm/api/calls.php?action=incoming
 https://yourdomain.com/leads-crm/api/calls.php?action=ended
 ```
 
+For your subdomain deployment, use:
+
+```text
+https://leads.solutionscience.co.ke/api/calls.php?action=incoming
+https://leads.solutionscience.co.ke/api/calls.php?action=ended
+```
+
 ## Zoho later
 
 Contacts already include:

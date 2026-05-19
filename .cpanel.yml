@@ -1,8 +1,7 @@
 ---
 deployment:
   tasks:
-    # Replace CPANEL_USERNAME with your actual cPanel username before first deployment.
-    - export DEPLOYPATH=/home/CPANEL_USERNAME/public_html/leads-crm
+    - export DEPLOYPATH=$HOME/leads.solutionscience.co.ke
     - /bin/mkdir -p $DEPLOYPATH
     - /bin/cp -R api $DEPLOYPATH
     - /bin/cp -R app $DEPLOYPATH

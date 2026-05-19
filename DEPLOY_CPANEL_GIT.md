@@ -4,19 +4,13 @@ This project is ready for cPanel's **Git Version Control** deployment flow.
 
 ## 1. Prepare the project locally
 
-Edit `.cpanel.yml` and replace:
+The deployment path is already set for your subdomain:
 
 ```text
-CPANEL_USERNAME
+$HOME/leads.solutionscience.co.ke
 ```
 
-with your actual cPanel username.
-
-Example:
-
-```yaml
-- export DEPLOYPATH=/home/myuser/public_html/leads-crm
-```
+That is the document root shown in cPanel for `leads.solutionscience.co.ke`.
 
 ## 2. Create the production database
 
@@ -35,7 +29,7 @@ In cPanel:
 In cPanel File Manager, after the first deployment, create:
 
 ```text
-/home/YOUR_CPANEL_USERNAME/public_html/leads-crm/.env
+$HOME/leads.solutionscience.co.ke/.env
 ```
 
 Use this format:
@@ -106,29 +100,29 @@ In cPanel Git Version Control:
 The `.cpanel.yml` file copies the app into:
 
 ```text
-/home/YOUR_CPANEL_USERNAME/public_html/leads-crm
+$HOME/leads.solutionscience.co.ke
 ```
 
 ## 7. Open the app
 
 ```text
-https://yourdomain.com/leads-crm/public/index.html
+https://leads.solutionscience.co.ke/public/index.html
 ```
 
 Admin:
 
 ```text
-https://yourdomain.com/leads-crm/public/admin.html
+https://leads.solutionscience.co.ke/public/admin.html
 ```
 
 MacroDroid incoming call URL:
 
 ```text
-https://yourdomain.com/leads-crm/api/calls.php?action=incoming
+https://leads.solutionscience.co.ke/api/calls.php?action=incoming
 ```
 
 MacroDroid call ended URL:
 
 ```text
-https://yourdomain.com/leads-crm/api/calls.php?action=ended
+https://leads.solutionscience.co.ke/api/calls.php?action=ended
 ```
